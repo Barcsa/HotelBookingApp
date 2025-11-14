@@ -1,0 +1,34 @@
+﻿@model HotelBookingApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Delete Booking";
+}
+
+<div class="container mt-4">
+
+    <h2>Delete Booking</h2>
+    <hr />
+
+    <p class="text-danger">Are you sure you want to delete this booking?</p>
+
+    <dl class="row">
+        <dt class="col-sm-3">User</dt>
+        <dd class="col-sm-9">@Model.User?.FirstName @Model.User?.LastName</dd>
+
+        <dt class="col-sm-3">Room</dt>
+        <dd class="col-sm-9">@Model.Room?.Name</dd>
+
+        <dt class="col-sm-3">Start</dt>
+        <dd class="col-sm-9">@Model.StartDate</dd>
+
+        <dt class="col-sm-3">End</dt>
+        <dd class="col-sm-9">@Model.EndDate</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="/Booking/Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+</div>

@@ -1,0 +1,51 @@
+﻿@model HotelBookingApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<div class="container mt-4">
+
+    <h2>Edit Booking</h2>
+    <hr />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label class="form-label">User</label>
+            <select asp-for="UserId" class="form-select" asp-items="ViewBag.Users"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Room</label>
+            <select asp-for="RoomId" class="form-select" asp-items="ViewBag.Rooms"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input asp-for="StartDate" class="form-control" type="datetime-local" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">End Date</label>
+            <input asp-for="EndDate" class="form-control" type="datetime-local" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/Booking/Index" class="btn btn-secondary ms-2">Cancel</a>
+
+    </form>
+
+</div>

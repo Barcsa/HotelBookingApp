@@ -7,10 +7,12 @@ namespace HotelBookingApp.Controllers
     public class RoomController : Controller
     {
         private readonly IRoomService _roomService;
+        private readonly IBookingService _bookingService;
 
-        public RoomController(IRoomService roomService)
+        public RoomController(IRoomService roomService, IBookingService bookingService)
         {
             _roomService = roomService;
+            _bookingService = bookingService;
         }
 
         public async Task<IActionResult> Index()
@@ -66,5 +68,17 @@ namespace HotelBookingApp.Controllers
             await _roomService.DeleteRoomAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Calendar(int id)
+        {
+            var room = await _roomService.GetRoomByIdAsync(id);
+            if (room == null) return NotFound();
+
+            var bookings = await _bookingService.GetBookingsByRoomAsync(id);
+
+            ViewBag.Room = room;
+            return View(bookings);
+        }
+    
     }
 }

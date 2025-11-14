@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HotelBookingApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "Room Calendar";
+    var room = ViewBag.Room as HotelBookingApp.Models.Room;
+}
+
+<div class="container mt-4">
+
+    <h2>Calendar – @room.Name</h2>
+    <hr />
+
+    <div id="calendarApp">
+        <calendar-component :bookings="bookings"></calendar-component>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    bookings: bookingsData
+                };
+            }
+        });
+
+        app.component("calendar-component", {
+            props: ["bookings"],
+            template: `
+                <div>
+                    <h4 class="mb-3">Bookings Timeline</h4>
+
+                    <div v-if="bookings.length === 0">
+                        <p>No bookings yet.</p>
+                    </div>
+
+                    <div v-for="b in bookings" 
+                    class="p-3 mb-2 border rounded bg-light">
+
+                    <strong>User:</strong> {{ b.User.FirstName }} {{ b.User.LastName }} <br />
+                    <strong>From:</strong> {{ formatDate(b.StartDate) }} <br />
+                    <strong>To:</strong> {{ formatDate(b.EndDate) }} <br />
+
+                    </div>
+                </div>
+            `,
+            methods: {
+                formatDate(dateStr) {   
+                    return new Date(dateStr).toLocaleString();
+                }
+            }
+        });
+
+        app.mount("#calendarApp");
+    </script>
+}

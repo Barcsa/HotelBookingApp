@@ -23,8 +23,22 @@ namespace HotelBookingApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var bookings = await _bookingService.GetAllBookingsAsync();
-            return View(bookings);
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var isAdmin = HttpContext.Session.GetString("IsAdmin") == "True";
+
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            if (isAdmin)
+            {
+                var all = await _bookingService.GetAllBookingsAsync();
+                return View(all);
+            }
+            else
+            {
+                var mine = await _bookingService.GetBookingsByUserAsync(userId.Value);
+                return View(mine);
+            }
         }
 
         public async Task<IActionResult> Create()

@@ -18,6 +18,7 @@
                 <th>Capacity</th>
                 <th>Description</th>
                 <th style="width: 150px;">Actions</th>
+                <th>Calendar</th>
             </tr>
         </thead>
 
@@ -32,6 +33,12 @@
                     <td>
                         <a class="btn btn-sm btn-warning me-1" href="/Room/Edit/@room.Id">Edit</a>
                         <a class="btn btn-sm btn-danger" href="/Room/Delete/@room.Id">Delete</a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-sm btn-info" href="/Room/Calendar/@room.Id">
+                            View Calendar
+                        </a>
                     </td>
                 </tr>
             }

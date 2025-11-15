@@ -1,0 +1,26 @@
+﻿@model IEnumerable<HotelBookingApp.Models.User>
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-4">
+    <h2>Select User</h2>
+    <hr />
+
+    <form asp-action="LoginConfirm" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">User</label>
+            <select name="userId" class="form-select">
+                @foreach (var u in Model)
+                {
+                    <option value="@u.Id">@u.FirstName @u.LastName</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+
+    </form>
+</div>

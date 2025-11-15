@@ -20,6 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 
     <script>
+        const bookingsData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+    </script>
+
+    <script>
         const app = Vue.createApp({
             data() {
                 return {

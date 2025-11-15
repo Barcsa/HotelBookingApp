@@ -20,9 +20,6 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
@@ -31,10 +28,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Booking" asp-action="Index">Bookings</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                     </ul>
+                    <div class="d-flex align-items-center">
+
+                        @{
+                            var userId = Context.Session.GetInt32("UserId");
+                            var isAdmin = Context.Session.GetString("IsAdmin") == "True";
+                            var userName = Context.Session.GetString("UserName");
+                        }
+
+                        @if (userId != null)
+                        {
+                            <span class="me-3 text-dark">
+                                Logged in as: <strong>@userName</strong>
+                                @if (isAdmin)
+                                {
+                                    <span class="badge bg-warning text-dark ms-2">Admin</span>
+                                }
+                            </span>
+
+                            <a class="btn btn-outline-danger btn-sm" href="/Auth/Logout">Logout</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-primary btn-sm" href="/Auth/Login">Login</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

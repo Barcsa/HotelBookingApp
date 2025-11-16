@@ -33,12 +33,12 @@
 
         <div class="mb-3">
             <label class="form-label">Start Date</label>
-            <input asp-for="StartDate" class="form-control" type="datetime-local" />
+            <input asp-for="StartDate" class="form-control datetimepicker" autocomplete="off" />
         </div>
 
         <div class="mb-3">
             <label class="form-label">End Date</label>
-            <input asp-for="EndDate" class="form-control" type="datetime-local" />
+            <input asp-for="EndDate" class="form-control datetimepicker" autocomplete="off" />
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>
@@ -47,3 +47,14 @@
     </form>
 
 </div>
+
+@section Scripts {
+    <script>
+        flatpickr(".datetimepicker", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true,
+            minuteIncrement: 15
+        });
+    </script>
+}

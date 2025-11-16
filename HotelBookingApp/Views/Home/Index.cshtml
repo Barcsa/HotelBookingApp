@@ -1,7 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var userName = Context.Session.GetString("UserName");
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">
+        Welcome @(!string.IsNullOrEmpty(userName) ? userName : "")
+    </h1>
 </div>

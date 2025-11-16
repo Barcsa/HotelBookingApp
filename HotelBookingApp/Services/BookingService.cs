@@ -26,6 +26,9 @@ namespace HotelBookingApp.Services
 
         public async Task<(bool Success, string Message)> CreateBookingAsync(Booking booking)
         {
+            if (booking.EndDate <= booking.StartDate)
+                return (false, "End date must be later than start date.");
+
             var isAvailable = await _bookingRepository.IsRoomAvailableAsync(
                 booking.RoomId,
                 booking.StartDate,
@@ -43,6 +46,9 @@ namespace HotelBookingApp.Services
 
         public async Task<(bool Success, string Message)> UpdateBookingAsync(Booking booking)
         {
+            if (booking.EndDate <= booking.StartDate)
+                return (false, "End date must be later than start date.");
+
             var isAvailable = await _bookingRepository.IsRoomAvailableForUpdateAsync(
                 booking.RoomId,
                 booking.StartDate,

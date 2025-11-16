@@ -5,12 +5,12 @@ The project allows creating users and rooms, managing bookings, and showing a ca
 How it works
 
 1. Users
-Users can be created with basic details and an “IsAdmin” flag.
+Users can be created with basic details and an â€œIsAdminâ€ flag.
 Login is very simple: the user just selects their name from a dropdown, and the session stores their ID and admin status.
 
 2. Rooms
 Rooms have a name, capacity, and optional description.
-Each room also has a “View Calendar” page where all bookings for that room are displayed.
+Each room also has a â€œView Calendarâ€ page where all bookings for that room are displayed.
 
 3. Bookings
 A booking is linked to a user and a room, and has a start and end date.
